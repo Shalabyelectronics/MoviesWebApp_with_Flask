@@ -3,3 +3,29 @@ This another practice project where we are going to build My top 10 Movies Web A
 
 ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/57592040/160715453-99e47916-8fd2-4c2f-a7a0-6ed316929006.gif)
 
+## STEP 1
+We need first to install all requirements frameworks and libraries, there is already a requirements text file that you can use it to do that by this command:
+```python
+pip install -r requirements.txt
+```
+Then we need to import all nessary classes and methods as showing below:
+```python
+# Flask class to create our web application and some others methods that will be used to render our html pages
+# And redirect to other html pages finally request to check which method GET or POST was implemented.
+from flask import Flask, render_template, redirect, url_for, request
+# You can read the documentation of bootstrap-flask that allow us to use Bootstrap4 and 5 version as well
+# https://bootstrap-flask.readthedocs.io/en/stable/migrate/
+from flask_bootstrap import Bootstrap5
+
+from flask_sqlalchemy import SQLAlchemy
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired, Length
+import tmdbsimple as tmdb
+import os
+import requests
+```
+
+### Creating instances and setting up Configrations:
+
+Before diving in our project we need to setup everythin we need after importing all nessarly classes and methods.
