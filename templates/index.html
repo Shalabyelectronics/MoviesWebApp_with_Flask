@@ -25,7 +25,7 @@
         </p>
           <p class="type">{{ movie.type }}</p>
 
-        <a href="{{ url_for('update_movie', movie_id=movie.id) }}" class="button">Update</a>
+        <a href="{{ url_for('update_review', movie_id=movie.id) }}" class="button">Update</a>
         <a href="{{ url_for('del_movie', movie_id=movie.id) }}" class="button delete-button">Delete</a>
 
       </div>

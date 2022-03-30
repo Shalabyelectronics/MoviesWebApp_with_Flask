@@ -128,8 +128,8 @@ def del_movie(movie_id):
     return redirect(url_for('home'))
 
 
-@app.route("/edit_movie/<movie_id>", methods=["GET", "POST"])
-def update_movie(movie_id):
+@app.route("/update_review/<movie_id>", methods=["GET", "POST"])
+def update_review(movie_id):
     form = EditReview()
     if request.method == "POST":
         if form.validate_on_submit():
