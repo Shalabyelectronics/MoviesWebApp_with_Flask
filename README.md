@@ -166,3 +166,7 @@ Well this line of code will order by Movies by thier rating from lower rating to
 from sqlalchemy import desc
 desc_movies_by_rating = db.session.query(Movies).order_by(desc(Movies.rating))
 ```
+For more details you can check SQLALchemy documentation [HERE](https://docs.sqlalchemy.org/en/14/core/sqlelement.html#sqlalchemy.sql.expression.desc)
+So What I'm aiming to achieve here is to show movies from lower rating to higher and the lower rating will hold the higher ranking I know it's not logic as the lower rating movie must have the lower ranking also but when I tried it I like how the movie displayed so I keep it like this and it is up to you how you want to change it as you like.
+
+lets explain the rest of the block of code, Well I created `all_movies empty list`
