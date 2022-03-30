@@ -169,4 +169,8 @@ desc_movies_by_rating = db.session.query(Movies).order_by(desc(Movies.rating))
 For more details you can check SQLALchemy documentation [HERE](https://docs.sqlalchemy.org/en/14/core/sqlelement.html#sqlalchemy.sql.expression.desc)
 So What I'm aiming to achieve here is to show movies from lower rating to higher and the lower rating will hold the higher ranking I know it's not logic as the lower rating movie must have the lower ranking also but when I tried it I like how the movie displayed so I keep it like this and it is up to you how you want to change it as you like.
 
-lets explain the rest of the block of code, Well I created `all_movies empty list`
+lets explain the rest of the block of code, Well I created `all_movies empty list` and because `movies_order_by_rating` is a custom generator belong to ALChemy we need to unpack the saved instances by using list comperhension and use `len` function to get the length of the Movies array `movies_length = len([m for m in movies_order_by_rating])`
+
+Then I created a count down list to use it as ranks `rank = [num for num in range(movies_length, 0, -1)]` So if the length of Movies are 3 so I will get inside the rank list `[3,2,1]`.
+
+And Finally we are going to loop throw the Movies Model and update our ranking Column and commit it to our database and appended to our `all_movies` empty list then when it ready we can send our list as argument by `movies` parameter from `render_template` method.
