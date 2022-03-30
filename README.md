@@ -299,3 +299,24 @@ def update_review(movie_id):
 ```
 Again we did the same steps with add route function but here we got the user review and update our review cell with the new data and commit it as well then again redirect the user to home page.
 
+### Delete Movie
+To delete movie we will create a Delete button the link to `del_movie` route function that will allow us to delete the selected movie ase well the code will look like this:
+```py
+@app.route("/delete_movie/<movie_id>")
+def del_movie(movie_id):
+    movie = db.session.query(Movies).filter_by(id=movie_id).first()
+    db.session.delete(movie)
+    db.session.commit()
+    return redirect(url_for('home'))
+```
+
+As we see here that we located the movie throw its `movie_id` and then deleted it and save changes by commited it, finally again will redirect us to the home page.
+
+## OVERVIEW
+
+The project didn't discuss handling error or how we could build flipcard with Css but it focused on dealing with How to connect our Flask Web Application with MovieDB API and use that data to feed our database.
+
+I figured out that I really need to learn about web development more to solve some issues that can't solve it with bootstrap-flask only.
+I wish this mini documentation help you to understand more this challenge and how to come over it an solve it as well.
+Goodluck for everyone.
+
