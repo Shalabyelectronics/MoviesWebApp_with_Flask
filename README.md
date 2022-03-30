@@ -174,3 +174,25 @@ lets explain the rest of the block of code, Well I created `all_movies empty lis
 Then I created a count down list to use it as ranks `rank = [num for num in range(movies_length, 0, -1)]` So if the length of Movies are 3 so I will get inside the rank list `[3,2,1]`.
 
 And Finally we are going to loop throw the Movies Model and update our ranking Column and commit it to our database and appended to our `all_movies` empty list then when it ready we can send our list as argument by `movies` parameter from `render_template` method.
+
+So Now we can move to our home page to arrange it for displaying the movies data so the part of html that we are going to use jinja2 Templating languge will be like this:
+```html
+{% for movie in movies %}
+  <div class="card" >
+    <div class="front" style="background-image: url({{ movie.image_url }});">
+        <p class="large">{{ movie.ranking }}</p>
+    </div>
+    <div class="back">
+      <div>
+    <div class="title"> {{ movie.title }} <span class="release_date">({{ movie.year }})</span></div>
+        <div class="rating">
+            <label>{{ movie.rating }}</label>
+          <i class="fas fa-star star"></i>
+        </div>
+          <p class="review">"{{ movie.review }}"</p>
+        <p class="overview">
+            {{ movie.description }}
+        </p>
+          <p class="type">{{ movie.type }}</p>
+{% endfor %}
+```
