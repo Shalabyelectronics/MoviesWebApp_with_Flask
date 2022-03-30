@@ -40,7 +40,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///my-top-movies.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 Bootstrap5(app)
-
 # We will use the link to join poster_path to provide the movie cover later
 IMAGE_MOVIEDB_URL = "https://image.tmdb.org/t/p/w500"
 
@@ -135,7 +134,6 @@ def update_movie(movie_id):
     if request.method == "POST":
         if form.validate_on_submit():
             movie = db.session.query(Movies).filter_by(id=movie_id).first()
-            movie.ranking = form.data.get("ranking")
             movie.review = form.data.get("review")
             db.session.commit()
             return redirect(url_for('home'))
