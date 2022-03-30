@@ -204,5 +204,5 @@ Great Job so far lets now add our add function with select to feed our database 
 
 ## STEP 4 - Search , SELECT, ADD
 
-I can see it is the most important step because here you need to get your movie data and save it to your database then display it as well, to do so we need to activate the add button that will take us to our add page where we will use our MovieTitle form we created later on [HERE](#movie-title-form)
+I can see it is the most important step because here you need to get your movie data and save it to your database then display it as well, to do so we need to activate the add button that will take us to our add page where we will use our MovieTitle form we created later on <a name=movie-title-form ></a>[HERE]
 
