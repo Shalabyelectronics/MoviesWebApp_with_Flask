@@ -282,4 +282,20 @@ class EditReview(FlaskForm):
     review = StringField("Review", validators=[DataRequired(), Length(min=10, max=250)])
     submit = SubmitField("Done")
 ```
-After that we need to create our 
+After that we need to create our update review route function and it will look like this:
+```py
+@app.route("/update_review/<movie_id>", methods=["GET", "POST"])
+def update_review(movie_id):
+    form = EditReview()
+    if request.method == "POST":
+        if form.validate_on_submit():
+            movie = db.session.query(Movies).filter_by(id=movie_id).first()
+            movie.review = form.data.get("review")
+            db.session.commit()
+            return redirect(url_for('home'))
+
+    movie_data = db.session.query(Movies).filter_by(id=movie_id).first()
+    return render_template('edit.html', movie=movie_data, form=form)
+```
+Again we did the same steps with add route function but here we got the user review and update our review cell with the new data and commit it as well then again redirect the user to home page.
+
