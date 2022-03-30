@@ -103,7 +103,7 @@ The Bourne Identity 8677 1988-05-08 1.53988446573129
 Bette Bourne: It Goes with the Shoes 179304  0.23
 ```
 For more details you can check tmdbsimple documentation [Here](https://github.com/celiao/tmdbsimple/)
-## STEP 3 - CREATE OUR FORM
+## STEP 3 - CREATE OUR FORM AND DO SOME EXPIRAMENTS.
 
 Now we need to create our form to get the data from the user and process the results, but what data we need exactly?? Yes, you gussed it again. We need the movie title to use it for searching to all related movies with Movie Database API.
 
@@ -113,3 +113,52 @@ class MoveTitle(FlaskForm):
     movie_title = StringField("Movie Title", validators=[DataRequired(), Length(min=2, max=250)])
     submit = SubmitField("Done")
 ```
+So we are almost ready but first we need to activate our database and to do so we can do that from importing our `db` instance and create all Models and save it to our database, we can do so by this code on python interactive console
+```python
+from main import db
+```
+If you did not get any error so you are on the right path else you need to check tour flask alchemy setup. Then we need to create our Books database table by using this line of code:
+```python
+db.create_all()
+```
+And you will see your database file will be created and place on the selected path. Now we can add data to our table by import the Model from our app script file and create an objects that referring to each row of data in our Movies table. I recommend you to do some experiment before implementing any code to your flask web app so you will be fully understanding of how you can deal with it later.
+
+So first expirament is lets add a movie by using Movies Model as below:
+```python
+movie = Movies(title="Drive", type="Action", year=2011, 
+                description="A mysterious Hollywood stuntman and mechanic moonligh
+                ts as a getaway driver and finds himself in trouble when he helps 
+                out his neighbor in this action drama.",rating=8.5, ranking=10,
+                review="I Loved it!!!",
+                image_url="https://www.cityonfire.com/wp-content/uploads/2012/02/drive-movie-poster-2011-"\                                      "1020745540.jpg")
+```
+then you need it to add it to that database and commit it as well like this:
+```python
+db.session.add(movie)
+db.session.commit()
+```
+Great now we are ready to view our first movie in our home page but again we need to create our home function route and render our html home and pass it our movie instance. and this what we are going to do next step.
+
+## STEP 4 - VIEW OUR FIRST MOVIE
+Because we are using bootstrap-flask we need to fellow its documentation because it is different from flask-bootstrap. I encourage you to spend some time with it so you can setup your html pages with bootstrap, you can get the documentation [HERE](https://bootstrap-flask.readthedocs.io/en/stable/migrate/)
+
+After sitting up your home page in our project it will be index.html our home route function will look like this:
+
+```python
+@app.route("/")
+def home():
+    movies_order_by_rating = db.session.query(Movies).order_by(Movies.rating)
+    all_movies = []
+    movies_length = len([m for m in movies_order_by_rating])
+    rank = [num for num in range(movies_length, 0, -1)]
+    for index, movie in enumerate(movies_order_by_rating):
+        movie.ranking = rank[index]
+        db.session.commit()
+        all_movies.append(movie)
+    return render_template("index.html", movies=all_movies)
+```
+Here we will stop for a while to explain what going on... First line in our home route function is 
+```python
+movies_order_by_rating = db.session.query(Movies).order_by(Movies.rating)
+```
+Well this line of code will 
