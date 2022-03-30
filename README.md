@@ -175,7 +175,7 @@ Then I created a count down list to use it as ranks `rank = [num for num in rang
 
 And Finally we are going to loop throw the Movies Model and update our ranking Column and commit it to our database and appended to our `all_movies` empty list then when it ready we can send our list as argument by `movies` parameter from `render_template` method.
 
-So Now we can move to our home page to arrange it for displaying the movies data so the part of html that we are going to use jinja2 Templating languge will be like this:
+So Now we can move to our home page to arrange it for displaying the movies data so the part of html that we are going to use jinja2 Templating engin, will be like this:
 ```html
 {% for movie in movies %}
   <div class="card" >
@@ -196,3 +196,11 @@ So Now we can move to our home page to arrange it for displaying the movies data
           <p class="type">{{ movie.type }}</p>
 {% endfor %}
 ```
+For more details you can check Jinja2 Documentation [HERE](https://jinja.palletsprojects.com/en/3.1.x/).
+![bandicam 2022-03-30 14-33-13-289](https://user-images.githubusercontent.com/57592040/160825323-9c137e80-f7e3-4572-bd0b-6f8564736fa9.jpg)
+
+Great Job so far lets now add our add function with select to feed our database data from Movie Database API and this what will discuse next.
+
+## STEP 4 - Search , SELECT, ADD
+
+
