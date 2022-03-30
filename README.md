@@ -108,7 +108,7 @@ For more details you can check tmdbsimple documentation [Here](https://github.co
 Now we need to create our form to get the data from the user and process the results, but what data we need exactly?? Yes, you gussed it again. We need the movie title to use it for searching to all related movies with Movie Database API.
 
 We are going to use FlaskForm and WTForms as well so our form will look like this:
-[MovieTitle Form](#movie-title-form)
+<a id='movie-title-form'></a>
 ```python
 class MoveTitle(FlaskForm):
     movie_title = StringField("Movie Title", validators=[DataRequired(), Length(min=2, max=250)])
@@ -204,5 +204,5 @@ Great Job so far lets now add our add function with select to feed our database 
 
 ## STEP 4 - Search , SELECT, ADD
 
-I can see it is the most important step because here you need to get your movie data and save it to your database then display it as well, to do so we need to activate the add button that will take us to our add page where we will use our MovieTitle form we created later on <a name=movie-title-form >[HERE]</a>
+I can see it is the most important step because here you need to get your movie data and save it to your database then display it as well, to do so we need to activate the add button that will take us to our add page where we will use our MovieTitle form we created later on [HERE](#movie-title-name)
 
