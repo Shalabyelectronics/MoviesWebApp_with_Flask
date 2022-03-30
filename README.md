@@ -108,7 +108,7 @@ For more details you can check tmdbsimple documentation [Here](https://github.co
 Now we need to create our form to get the data from the user and process the results, but what data we need exactly?? Yes, you gussed it again. We need the movie title to use it for searching to all related movies with Movie Database API.
 
 We are going to use FlaskForm and WTForms as well so our form will look like this:
-#movie-title-form
+[MovieTitle Form](#movie-title-form)
 ```python
 class MoveTitle(FlaskForm):
     movie_title = StringField("Movie Title", validators=[DataRequired(), Length(min=2, max=250)])
