@@ -61,4 +61,46 @@ But Here I'm not going to explain each details for this project because our focu
 
 ## STEP 2 - CREATING OUR MOVIES MODEL
 
+Our Movies Model will includes 9 Columns as mentioned below:
+```python
+# Database Movies Table
+class Movies(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(120), unique=True, nullable=False)
+    type = db.Column(db.String(100), nullable=False)
+    year = db.Column(db.Integer, nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    rating = db.Column(db.Float, nullable=False)
+    ranking = db.Column(db.Integer, nullable=True)
+    review = db.Column(db.String(250), nullable=True, default="I loved it!!!")
+    image_url = db.Column(db.String(20), nullable=False, default='static/images/default.jpg')
+```
+And I build this Model after checking which Movie data I can get from Movie DataBase API, and it is many actually but what is important for us the below:
+1. (id) and it will generate automaticly
+2. (title) We will get it from Movie DataBase API
+3. (type) or Genre,  We will get it from Movie DataBase API
+4. (year)  We will get it from Movie DataBase API
+5. (description)  We will get it from Movie DataBase API
+6. (rating)  We will get it from Movie DataBase API
+7. (ranking) This will be some tricky because we will order to movies from lower rating to higher so we will generate numbers from max movies list to the min
+8. (review) will have default value but we can also edit it later.
+9. (image_url) We will get it from Movie DataBase API
 
+And I know all that because I tried first the Movie Database API and you can do so in your interactive python consol by importing everything and start expiraments your instances and methodes like this:
+
+```python
+from main import *
+>>> search = tmdb.Search()
+>>> response = search.movie(query='The Bourne')
+>>> for s in search.results:
+...     print(s['title'], s['id'], s['release_date'], s['popularity'])
+...
+The Bourne Ultimatum 2503 2007-08-03 55.2447062124256
+The Bourne Supremacy 2502 2004-07-23 43.4553609681985
+The Bourne Identity 2501 2002-06-06 38.5531563780592
+The Bourne Legacy 49040 2012-08-10 9.90635210153143
+The Bourne Identity 8677 1988-05-08 1.53988446573129
+Bette Bourne: It Goes with the Shoes 179304  0.23
+```
+For more details you can check tmdbsimple documentation [Here](https://github.com/celiao/tmdbsimple/)
+## STEP 3 - 
