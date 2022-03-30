@@ -161,4 +161,8 @@ Here we will stop for a while to explain what going on... First line in our home
 ```python
 movies_order_by_rating = db.session.query(Movies).order_by(Movies.rating)
 ```
-Well this line of code will 
+Well this line of code will order by Movies by thier rating from lower rating to higher rating. if you want the oppsit I mean from higher to lower you can add this line of code instead of this one:
+```py
+from sqlalchemy import desc
+desc_movies_by_rating = db.session.query(Movies).order_by(desc(Movies.rating))
+```
