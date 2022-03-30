@@ -56,7 +56,7 @@ Bootstrap5(app)
 IMAGE_MOVIEDB_URL = "https://image.tmdb.org/t/p/w500"
 ```
 
-Before diving on our project we need to setup everythin we need after importing all nessarly classes and methods.
+Before diving on our project we need to setup everythin we need after importing all necessarily classes and methods.
 But Here I'm not going to explain each details for this project because our focuse will be on creating our Movies Database Model and how to use the Movie Database Api to fetch the movie data and save it to our database and display it as well.
 
 ## STEP 2 - CREATING OUR MOVIES MODEL
@@ -86,7 +86,7 @@ And I build this Model after checking which Movie data I can get from Movie Data
 8. (review) will have default value but we can also edit it later.
 9. (image_url) We will get it from Movie DataBase API
 
-And I know all that because I tried first the Movie Database API and you can do so in your interactive python consol by importing everything and start expiraments your instances and methodes like this:
+And I know all that because I tried first the Movie Database API and you can do so in your interactive python consol by importing everything and start experiments your instances and methodes like this:
 
 ```python
 from main import *
@@ -118,7 +118,7 @@ So we are almost ready but first we need to activate our database and to do so w
 ```python
 from main import db
 ```
-If you did not get any error so you are on the right path else you need to check tour flask alchemy setup. Then we need to create our Books database table by using this line of code:
+If you did not get any error so you are on the right path else you need to check your flask alchemy setup. Then we need to create our Books database table by using this line of code:
 ```python
 db.create_all()
 ```
@@ -162,7 +162,7 @@ Here we will stop for a while to explain what going on... First line in our home
 ```python
 movies_order_by_rating = db.session.query(Movies).order_by(Movies.rating)
 ```
-Well this line of code will order by Movies by thier rating from lower rating to higher rating. if you want the oppsit I mean from higher to lower you can add this line of code instead of this one:
+Well this line of code will order by Movies by their rating from lower rating to higher rating. if you want the opposite I mean from higher to lower you can add this line of code instead of this one:
 ```py
 from sqlalchemy import desc
 desc_movies_by_rating = db.session.query(Movies).order_by(desc(Movies.rating))
@@ -170,7 +170,7 @@ desc_movies_by_rating = db.session.query(Movies).order_by(desc(Movies.rating))
 For more details you can check SQLALchemy documentation [HERE](https://docs.sqlalchemy.org/en/14/core/sqlelement.html#sqlalchemy.sql.expression.desc)
 So What I'm aiming to achieve here is to show movies from lower rating to higher and the lower rating will hold the higher ranking I know it's not logic as the lower rating movie must have the lower ranking also but when I tried it I like how the movie displayed so I keep it like this and it is up to you how you want to change it as you like.
 
-lets explain the rest of the block of code, Well I created `all_movies empty list` and because `movies_order_by_rating` is a custom generator belong to ALChemy we need to unpack the saved instances by using list comperhension and use `len` function to get the length of the Movies array `movies_length = len([m for m in movies_order_by_rating])`
+lets explain the rest of the block of code, Well I created `all_movies empty list` and because `movies_order_by_rating` is a custom generator belong to ALChemy we need to unpack the saved instances by using list comprehension and use `len` function to get the length of the Movies array `movies_length = len([m for m in movies_order_by_rating])`
 
 Then I created a count down list to use it as ranks `rank = [num for num in range(movies_length, 0, -1)]` So if the length of Movies are 3 so I will get inside the rank list `[3,2,1]`.
 
@@ -267,7 +267,7 @@ def add_movie_to_db(movie_id):
 
     return redirect(url_for('home'))
 ```
-After doing some expirament I did find all movie data I need to feed my database and I created a movie instance from the Movies Model class and I add it to the database and commit the changes as well.
+After doing some experiments I did find all movie data I need to feed my database and I created a movie instance from the Movies Model class and I add it to the database and commit the changes as well.
 And when All done it will redirect us to the home page where all Movies will load and display as well.
 ![bandicam 2022-03-30 18-18-00-192](https://user-images.githubusercontent.com/57592040/160870637-ad40b39d-3423-421d-be79-da83cbe40f23.jpg)
 
@@ -300,7 +300,7 @@ def update_review(movie_id):
 Again we did the same steps with add route function but here we got the user review and update our review cell with the new data and commit it as well then again redirect the user to home page.
 
 ### Delete Movie
-To delete movie we will create a Delete button the link to `del_movie` route function that will allow us to delete the selected movie ase well the code will look like this:
+To delete movie we will create a Delete button the link to `del_movie` route function that will allow us to delete the selected movie as well the code will look like this:
 ```py
 @app.route("/delete_movie/<movie_id>")
 def del_movie(movie_id):
