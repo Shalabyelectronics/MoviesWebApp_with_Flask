@@ -204,5 +204,68 @@ Great Job so far lets now add our add function with select to feed our database 
 
 ## STEP 4 - Search , SELECT, ADD
 
-I can see it is the most important step because here you need to get your movie data and save it to your database then display it as well, to do so we need to activate the add button that will take us to our add page where we will use our MovieTitle form we created later on [HERE](##STEP-3---CREATE-OUR-FORM-AND-DO-SOME-EXPIRAMENTS.)
+I can see it is the most important step because here you need to get your movie data and save it to your database then display it as well, to do so we need to activate the add button that will take us to our add page where we will use our MovieTitle form we created later.
 
+The MovieTitle FlaskForm:
+```py
+class MoveTitle(FlaskForm):
+    movie_title = StringField("Movie Title", validators=[DataRequired(), Length(min=2, max=250)])
+    submit = SubmitField("Done")
+```
+Then we will create our add route method that will allowed for GET and POST Methods
+```py
+@app.route("/add_movie", methods=["GET", "POST"])
+def add_movie():
+    form = MoveTitle()
+    if request.method == "POST":
+        if form.validate_on_submit():
+            return redirect(url_for('select_movie', movie_title=form.data.get('movie_title')))
+    return render_template("add.html", form=form)
+```
+As we can see When the user submit the form to our server we will check if the form data is validate and it will redirect us to the select route function where we will request the Movie data by seaching with the movie name throw THEMOVIE DATABASE SERVER by Thier end point API.
+So our select route function will look like this:
+```py
+@app.route('/select_movie/<movie_title>)', methods=["GET", "POST"])
+def select_movie(movie_title):
+    search = tmdb.Search()
+    search.movie(query=movie_title)
+    return render_template('select.html', all_movies=search.results)
+```
+Here we created an instance from tmdb the tmdbsimple wrapper and we will use search class to search by the movie name that we got from the add route function.
+Then we will render the `select.html` with a parameter that hold the all results founds.
+Now we need to display all results in our select page and to do so we can check the code below:
+```html
+{% for movie in all_movies %}
+  <p>
+    <a href="{{ url_for('add_movie_to_db', movie_id=movie['id']) }}"> MOVIE TITLE: {{ movie['title'] }} - MOVIE RELEASE DATE: {{movie['release_date'][:4] }}</a>
+  </p>
+{% endfor %}
+```
+and it will look like this 
+![bandicam 2022-03-30 17-58-10-682](https://user-images.githubusercontent.com/57592040/160865812-84ba1963-1515-4145-9fcd-e2600c54c08b.jpg)
+
+As we see when the user click on any link that will add the movie data to our database and here we just pass the movie id as argument to `movie_id` parameter.
+And our `add_movie_to_db` will look like this 
+```py
+@app.route('/add_to_db/<movie_id>', methods=["GET", "POST"])
+def add_movie_to_db(movie_id):
+    movie = tmdb.Movies(movie_id).info()
+    movie_title = movie.get('title')
+    movie_genre = movie.get('genres')[0].get('name')
+    year = int(movie.get('release_date')[:4])
+    description = movie.get('overview')
+    rating = movie.get('vote_average')
+    image_url = movie.get('poster_path')
+    movie = Movies(title=movie_title,
+                   type=movie_genre,
+                   year=year,
+                   description=description,
+                   rating=rating,
+                   image_url=IMAGE_MOVIEDB_URL + image_url)
+    db.session.add(movie)
+    db.session.commit()
+
+    return redirect(url_for('home'))
+```
+After doing some expirament I did find all movie data I need to feed my database and I created a movie instance from the Movies Model class and I add it to the database and commit the changes as well.
+And when All done it will redirect us to the home page where all Movies will load and display as well.
