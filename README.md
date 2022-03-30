@@ -269,3 +269,17 @@ def add_movie_to_db(movie_id):
 ```
 After doing some expirament I did find all movie data I need to feed my database and I created a movie instance from the Movies Model class and I add it to the database and commit the changes as well.
 And when All done it will redirect us to the home page where all Movies will load and display as well.
+![bandicam 2022-03-30 18-18-00-192](https://user-images.githubusercontent.com/57592040/160870637-ad40b39d-3423-421d-be79-da83cbe40f23.jpg)
+
+Greate job so far after that we need to update our review and delete Movie Options and that will do next Step.
+
+## STEP 5 - Update Review and Delete Movie
+What if I want to update my review as by default review Column have a ready review so if I want to update it I could do so by creating a form to allow user to type a new review then update it to our database.
+
+So lets create our EditReview FlaskForm and it will be like this :
+```py
+class EditReview(FlaskForm):
+    review = StringField("Review", validators=[DataRequired(), Length(min=10, max=250)])
+    submit = SubmitField("Done")
+```
+After that we need to create our 
